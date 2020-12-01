@@ -31,8 +31,25 @@ class MovieDB {
 
     afficherDernierFilm(data){
         console.log('afficherDernierFilm');
-        for (let i = 0; i < data.length; i++) {
-            console.log(data[i]);
+
+        let section = document.querySelector('.liste-films');
+        console.log(section);
+        for (let i = 0; i < this.nbFilm; i++) {
+            //console.log(data[i].title);
+            //console.log(data[i].overview);
+            let article = document.querySelector('.template .film').cloneNode(true);
+            article.querySelector('h2').innerHTML = data[i].title;
+            article.querySelector('.description').innerHTML = data[i].overview;
+            //if(data[i].overview != ""){
+               //article.querySelector('.description').innerHTML = data[i].overview;
+            //}else{
+                //article.querySelector('.description').innerHTML = "Aucune description disponible"
+            //}
+            article.querySelector('.description').innerHTML = data[i].overview || "Aucune description disponible";
+            let image = article.querySelector('img');
+            image.src = this.imgPath + "w300" + data[i].poster_path;
+
+            section.appendChild(article); /*on ajoute la copie*/
         }
     }
 }
